@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "209229391921",
+    "firebase_url": "https://curta-cultura-c176f.firebaseio.com",
+    "project_id": "curta-cultura-c176f",
+    "storage_bucket": "curta-cultura-c176f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209229391921:android:06e70f49449075bc",
+        "android_client_info": {
+          "package_name": "br.com.curtacultura.curtacultura"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209229391921-1mmfpp09t9b5cdfae0id8co22fak9gq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.curtacultura.curtacultura",
+            "certificate_hash": "f494012f74050e4a75e197c4e4e5c40a2fc1a3eb"
+          }
+        },
+        {
+          "client_id": "209229391921-c4kcb55qqmfqs5bfnd9mprrqn48ha1n7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "209229391921-c4kcb55qqmfqs5bfnd9mprrqn48ha1n7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuvbnQTJkUDVYHzL47z7bnyJTONz_xmIk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209229391921-c4kcb55qqmfqs5bfnd9mprrqn48ha1n7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

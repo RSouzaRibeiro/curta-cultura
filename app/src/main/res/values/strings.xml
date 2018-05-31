@@ -1,6 +1,7 @@
 <resources>
 
     <string name="API_KEY_PLACE">AIzaSyAUv2EfcjBQBGB0FZmVTQ5LjXECKAiVxcU</string>
+    <string name="TOKEN_CLIMA">26541611b0ed37585afb4439ed466cd4</string>
     <string name="app_name">Curta Cultura</string>
     <string name="title_activity_main">MainActivity</string>
 
@@ -28,4 +29,11 @@
     <string name="label_button_enter">Entrar</string>
     <string name="label_forgot_password">Esqueceu a Senha?</string>
     <string name="label_new_register">Cadastra-se</string>
+    <string name="label_register">Registre-se</string>
+    <string name="hint_name">Nome Completo</string>
+    <string name="hint_email">email</string>
+    <string name="hint_senha">senha</string>
+    <string name="hint_senha_confir">Confirmar Senha</string>
+    <string name="hint_back">Voltar</string>
+    <string name="label_text_forgot_password">Informe seu email, enviaremos um email, para que possa resgatar a sua senha.</string>
 </resources>

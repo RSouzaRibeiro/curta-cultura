@@ -1,6 +1,7 @@
 package br.com.curtacultura.curtacultura.scenes.main
 
 import br.com.curtacultura.curtacultura.model.Area
+import br.com.curtacultura.curtacultura.model.Previsao
 
 /**
  * Created by rafae on 27/05/2018.
@@ -8,7 +9,7 @@ import br.com.curtacultura.curtacultura.model.Area
 interface MainInterface {
 
     interface View{
-        fun getAreasSucess(areas : ArrayList<Area>)
+        fun getAreasSucess(areas : Previsao)
         fun emitErrorSnake(message: String)
     }
 

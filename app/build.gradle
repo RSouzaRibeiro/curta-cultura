@@ -5,10 +5,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key'
+            keyPassword 'R@fael123'
+            storeFile file('key.jks')
+            storePassword 'R@fael123'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "br.com.curtacultura.curtacultura"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -31,8 +39,10 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-core:15.0.0'
+    implementation 'com.google.firebase:firebase-auth:15.0.0'
+    implementation 'com.google.firebase:firebase-database:15.0.0'
+    implementation 'com.google.firebase:firebase-firestore:15.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
 
     testImplementation 'junit:junit:4.12'
@@ -49,6 +59,7 @@ dependencies {
     //Lib Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
 }
+
 
 
 

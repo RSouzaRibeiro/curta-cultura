@@ -8,10 +8,6 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="@string/API_KEY_PLACE" />
-
     <application
         android:name=".core.App"
         android:allowBackup="true"
@@ -33,8 +29,15 @@
         <activity android:name=".scenes.splash.Splash" />
         <activity
             android:name=".scenes.login.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.Login" />
+        <activity
+            android:name=".scenes.register.RegisterActivity"
+            android:theme="@style/AppTheme.Login" />
+        <activity
+            android:name=".scenes.resetPassword.ResetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@ class RetrofitInitializer {
 
 
       private val retrofit = Retrofit.Builder()
-                .baseUrl("http://api.salic.cultura.gov.br/v1/swagger-def/")
+                .baseUrl("http://apiadvisor.climatempo.com.br/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
