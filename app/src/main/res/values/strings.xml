@@ -32,6 +32,7 @@
     <string name="label_register">Registre-se</string>
     <string name="hint_name">Nome Completo</string>
     <string name="hint_email">email</string>
+    <string name="label_enviar">Enviar</string>
     <string name="hint_senha">senha</string>
     <string name="hint_senha_confir">Confirmar Senha</string>
     <string name="hint_back">Voltar</string>

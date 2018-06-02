@@ -58,6 +58,9 @@ dependencies {
 
     //Lib Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //Diagonal Layout
+    implementation 'com.github.florent37:diagonallayout:1.0.7'
 }
 
 

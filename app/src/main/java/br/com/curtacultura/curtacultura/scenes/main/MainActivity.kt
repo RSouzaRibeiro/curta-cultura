@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -20,13 +21,16 @@ import br.com.curtacultura.curtacultura.model.User
 import br.com.curtacultura.curtacultura.persistence.dao.UserDAO
 import br.com.curtacultura.curtacultura.scenes.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 
 class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnNavigationItemSelectedListener {
+
 
 
     private var mAuthListener: FirebaseAuth.AuthStateListener? = null
@@ -47,7 +51,8 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
 
-            presenter.getAreas()
+            //presenter.getAreas()
+            presenter.getCentrosCulturais()
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -59,6 +64,7 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
 
         verifyUser()
         initView()
+        presenter.getCentrosCulturais()
     }
 
     override fun onBackPressed() {
@@ -134,6 +140,7 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
     private fun goToLogin() {
         var loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
+        finish()
     }
 
     override fun getAreasSucess(areas: Previsao) {
@@ -142,5 +149,15 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
 
     override fun emitErrorSnake(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun getCentrosCulturaisSuccess(result: QuerySnapshot) {
+       Toast.makeText(this,result.documents[0].data?.get("nome").toString(), Toast.LENGTH_LONG).show()
+        initRecycleView(result)
+    }
+
+    private fun initRecycleView(result: QuerySnapshot){
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = MainAdapter(this, result)
     }
 }
