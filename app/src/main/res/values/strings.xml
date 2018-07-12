@@ -37,4 +37,10 @@
     <string name="hint_senha_confir">Confirmar Senha</string>
     <string name="hint_back">Voltar</string>
     <string name="label_text_forgot_password">Informe seu email, enviaremos um email, para que possa resgatar a sua senha.</string>
+    <string name="mensagem_digite_seu_nome">Digite seu nome</string>
+    <string name="mensagem_digite_email">Informe Email</string>
+    <string name="mensagem_informe_senha">Informe Senha</string>
+    <string name="mensagem_confirme_senha">Confirme senha</string>
+    <string name="mensagem_campo_senha_diferente">Os campos de senhas devem ser iguais.</string>
+    <string name="mensagem_envio_email">Enviamos um email para resetar a senha</string>
 </resources>

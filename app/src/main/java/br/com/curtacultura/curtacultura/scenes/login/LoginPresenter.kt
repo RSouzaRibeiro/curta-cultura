@@ -15,8 +15,6 @@ class LoginPresenter(val view: LoginInterface.View, val contexto: Context) : Log
 
         mAuth.signInWithEmailAndPassword(user, password)
                 .addOnCompleteListener(contexto as LoginActivity) { task ->
-
-
                     if (task.isSuccessful) {
                         val user = mAuth.currentUser
                         if (user != null) {
@@ -24,11 +22,9 @@ class LoginPresenter(val view: LoginInterface.View, val contexto: Context) : Log
                         }
                     } else {
                         task.exception?.let {
-                            throw it
+                            view.emitError(it.localizedMessage)
                         }
                     }
-
-
                 }.addOnFailureListener {
                     it.printStackTrace()
                 }

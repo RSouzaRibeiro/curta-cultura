@@ -27,7 +27,7 @@ class ResetPasswordActivity : AppCompatActivity(), ResetPasswordInterface.View {
 
     override fun resetPasswordSucess() {
         progressBar.visibility = View.GONE
-       Toast.makeText(this, "Enviamos um email para resetar a senha", Toast.LENGTH_LONG).show()
+       Toast.makeText(this, getString(R.string.mensagem_envio_email), Toast.LENGTH_LONG).show()
         finish()
     }
 

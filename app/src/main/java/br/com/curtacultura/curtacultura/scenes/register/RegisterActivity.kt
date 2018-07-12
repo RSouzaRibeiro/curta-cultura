@@ -29,10 +29,10 @@ class RegisterActivity : AppCompatActivity(), RegisterInterface.View {
 
         enterBTN.setOnClickListener{
             when{
-                TextUtils.isEmpty(nameTXT.text.toString()) -> nameTXT.error = "Digite seu nome"
-                TextUtils.isEmpty(emailTXT.text.toString()) -> emailTXT.error ="Informe Email"
-                TextUtils.isEmpty(senhaTXT.text.toString()) -> senhaTXT.error ="Informe Senha"
-                TextUtils.isEmpty(senhaConfirmTXT.text.toString()) -> senhaConfirmTXT.error = "Confirme senha"
+                TextUtils.isEmpty(nameTXT.text.toString()) -> nameTXT.error = getString(R.string.mensagem_digite_seu_nome)
+                TextUtils.isEmpty(emailTXT.text.toString()) -> emailTXT.error =getString(R.string.mensagem_digite_email)
+                TextUtils.isEmpty(senhaTXT.text.toString()) -> senhaTXT.error =getString(R.string.mensagem_informe_senha)
+                TextUtils.isEmpty(senhaConfirmTXT.text.toString()) -> senhaConfirmTXT.error = getString(R.string.mensagem_confirme_senha)
                 else -> when{
                     TextUtils.equals(senhaTXT.text.toString(), senhaConfirmTXT.text.toString()) ->{
                         progressBar.visibility = View.VISIBLE
@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity(), RegisterInterface.View {
 
 
                     else ->
-                        Toast.makeText(this, "os Campos de senhas devem ser iguais.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, getString(R.string.mensagem_campo_senha_diferente), Toast.LENGTH_LONG).show()
 
                 }
 

@@ -18,10 +18,6 @@ class Service {
         @GET("forecast/locale/{id}/days/{days}?")
         fun getAreas(@Path("id") id :String, @Path("days") days : String, @Query("token") token: String) : Call<Previsao>
 
-      /*  @GET("weather/")
-        fun getWeathers() : Call<ArrayList<Weather>>
 
-        @GET("cities/{woeid}/year/{year}/")
-        fun getWeathersCity(@Path("woeid") woeid :String, @Path("year") year : String) : Call<ArrayList<WeathersCity>>*/
     }
 }

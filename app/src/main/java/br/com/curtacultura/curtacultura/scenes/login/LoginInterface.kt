@@ -9,7 +9,7 @@ interface LoginInterface {
 
     interface View{
         fun loginSucess(userLogged: FirebaseUser)
-        fun emitError(message: String)
+        fun emitError(message: String?)
     }
 
     interface Presenter{

@@ -21,7 +21,7 @@ class MainPresenter(var view: MainInterface.View) : MainInterface.Presenter {
     override fun getCentrosCulturais() {
         firebaseStore.collection("centrosCulturais").get().addOnCompleteListener { task ->
             if(task.isSuccessful){
-                val result = task.getResult()
+                val result = task.result
                 view.getCentrosCulturaisSuccess(result)
             }else{
                 task.exception?.let {
@@ -31,24 +31,4 @@ class MainPresenter(var view: MainInterface.View) : MainInterface.Presenter {
         }
     }
 
-    override fun getAreas() {
-        val call = RetrofitInitializer().noteService().getAreas("3477", "15", "26541611b0ed37585afb4439ed466cd4")
-
-        call.enqueue(object : Callback<Previsao> {
-            override fun onFailure(call: Call<Previsao>?, t: Throwable?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onResponse(call: Call<Previsao>?, response: Response<Previsao>?) {
-                if (response != null) {
-                    var areas = response.body()
-                    view.getAreasSucess(areas!!)
-                }
-
-
-            }
-
-
-        })
-    }
 }

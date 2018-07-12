@@ -53,10 +53,10 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
-        Toast.makeText(this, userLogged.email, Toast.LENGTH_LONG).show()
+
     }
 
-    override fun emitError(message: String) {
+    override fun emitError(message: String?) {
         progressBar.visibility = View.GONE
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }

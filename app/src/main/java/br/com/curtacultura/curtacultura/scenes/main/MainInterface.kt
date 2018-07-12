@@ -10,13 +10,13 @@ import com.google.firebase.firestore.QuerySnapshot
 interface MainInterface {
 
     interface View{
-        fun getAreasSucess(areas : Previsao)
+
         fun emitErrorSnake(message: String)
         fun getCentrosCulturaisSuccess(result: QuerySnapshot)
     }
 
     interface Presenter{
-        fun getAreas()
+
         fun getCentrosCulturais()
     }
 }
