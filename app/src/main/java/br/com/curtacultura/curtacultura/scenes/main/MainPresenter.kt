@@ -1,12 +1,7 @@
 package br.com.curtacultura.curtacultura.scenes.main
 
-import android.view.View
-import br.com.curtacultura.curtacultura.core.App.Companion.context
-import br.com.curtacultura.curtacultura.model.Area
-import br.com.curtacultura.curtacultura.model.CentrosCulturais
-import br.com.curtacultura.curtacultura.model.Previsao
+import br.com.curtacultura.curtacultura.model.CultureCenter
 import com.example.thevacationplanner.thevacationplanner.webService.RetrofitInitializer
-import com.google.firebase.firestore.FirebaseFirestore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,20 +10,49 @@ import retrofit2.Response
  * Created by rafae on 27/05/2018.
  */
 class MainPresenter(var view: MainInterface.View) : MainInterface.Presenter {
+    override fun searchCultureCenter(search: String) {
+        val call = RetrofitInitializer().service().searchCultureCenter(search)
 
-    val firebaseStore = FirebaseFirestore.getInstance()
+        call.enqueue(object: Callback<ArrayList<CultureCenter>>{
+            override fun onFailure(call: Call<ArrayList<CultureCenter>>, t: Throwable) {
+                view.emitErrorSnake(t.localizedMessage)
+            }
 
-    override fun getCentrosCulturais() {
-        firebaseStore.collection("centrosCulturais").get().addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                val result = task.result
-                view.getCentrosCulturaisSuccess(result)
-            }else{
-                task.exception?.let {
-                    throw it
+            override fun onResponse(call: Call<ArrayList<CultureCenter>>, response: Response<ArrayList<CultureCenter>>) {
+                if(response.isSuccessful){
+                    var cultureCenter = response.body()
+                    if(cultureCenter!=null){
+                        view.getCentrosCulturaisSuccess(cultureCenter)
+                    }
+                }else{
+                    view.emitErrorSnake(response.message())
                 }
             }
-        }
+
+        })
     }
+
+    override fun getCentrosCulturais() {
+        val call = RetrofitInitializer().service().getCultureCenterAll()
+
+        call.enqueue(object : Callback<ArrayList<CultureCenter>>{
+            override fun onFailure(call: Call<ArrayList<CultureCenter>>, t: Throwable) {
+                view.emitErrorSnake(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ArrayList<CultureCenter>>, response: Response<ArrayList<CultureCenter>>) {
+                if(response.isSuccessful){
+                    var cultureCenter = response.body()
+                    if(cultureCenter!=null){
+                        view.getCentrosCulturaisSuccess(cultureCenter)
+                    }
+                }else{
+                    view.emitErrorSnake(response.message())
+                }
+            }
+
+        })
+    }
+
 
 }

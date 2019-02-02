@@ -7,16 +7,16 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import br.com.curtacultura.curtacultura.R
+import br.com.curtacultura.curtacultura.helpers.AuthHelper
+import br.com.curtacultura.curtacultura.model.response.TokenResponse
 import br.com.curtacultura.curtacultura.scenes.main.MainActivity
-import br.com.curtacultura.curtacultura.scenes.register.RegisterActivity
-import br.com.curtacultura.curtacultura.scenes.resetPassword.ResetPasswordActivity
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginInterface.View {
 
 
-    private var presenter = LoginPresenter(this, this)
+
+    private var presenter = LoginPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,23 +37,23 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
             }
         }
 
-        forgotPasswordTXT.setOnClickListener {
-            val intent = Intent(this, ResetPasswordActivity::class.java)
-            startActivity(intent)
-        }
 
-        newRegisterTXT.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
     }
 
-    override fun loginSucess(userLogged: FirebaseUser) {
+    override fun loginSucess(token: String) {
         progressBar.visibility = View.GONE
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
 
+    }
+
+    override fun getTokenSuccess(token: TokenResponse) {
+        AuthHelper().setAuthToken(token.token!!)
+        progressBar.visibility = View.GONE
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun emitError(message: String?) {

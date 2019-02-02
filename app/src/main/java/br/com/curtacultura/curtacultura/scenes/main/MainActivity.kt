@@ -12,30 +12,26 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 import br.com.curtacultura.curtacultura.R
-import br.com.curtacultura.curtacultura.core.App
-import br.com.curtacultura.curtacultura.model.Area
-import br.com.curtacultura.curtacultura.model.Previsao
+import br.com.curtacultura.curtacultura.helpers.AuthHelper
+import br.com.curtacultura.curtacultura.model.CultureCenter
 import br.com.curtacultura.curtacultura.model.User
-import br.com.curtacultura.curtacultura.persistence.dao.UserDAO
 import br.com.curtacultura.curtacultura.scenes.login.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.gson.Gson
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main2.*
-import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 
 class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnNavigationItemSelectedListener {
 
 
 
-    private var mAuthListener: FirebaseAuth.AuthStateListener? = null
-    val mAuth = FirebaseAuth.getInstance()
+
+
     private var presenter = MainPresenter(this)
     private var user: User? = null
 
@@ -57,8 +53,15 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
         nav_view.setNavigationItemSelectedListener(this)
 
         verifyUser()
-        initView()
+        //initView()
         presenter.getCentrosCulturais()
+
+        initAdmob()
+    }
+
+    private fun initAdmob() {
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
     override fun onBackPressed() {
@@ -79,6 +82,37 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        var item = menu?.findItem(R.id.menuSearch)
+        var searchView = item?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                if(!p0.isNullOrBlank()){
+                    presenter.searchCultureCenter(p0)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                if(!p0.isNullOrBlank()){
+                    presenter.searchCultureCenter(p0)
+                }
+                return false
+            }
+
+        })
+        searchView.setOnCloseListener(object: SearchView.OnCloseListener{
+            override fun onClose(): Boolean {
+                presenter.getCentrosCulturais()
+                return false
+            }
+
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
@@ -93,17 +127,17 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
     }
 
     private fun logout(){
-        mAuth.signOut()
+        AuthHelper().setAuthToken(null)
         this.finish()
         goToLogin()
     }
 
     private fun verifyUser() {
-        if (mAuth.currentUser == null) {
+        if ( AuthHelper().getAuthToken() == null) {
             goToLogin()
         }
     }
-
+/*
     private fun initView() {
         val user = mAuth.currentUser
         if (user != null) {
@@ -111,7 +145,7 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
             nav_view.getHeaderView(0).emailTXT.text = user.email
 
         }
-    }
+    }*/
 
     private fun goToLogin() {
         var loginIntent = Intent(this, LoginActivity::class.java)
@@ -125,11 +159,11 @@ class MainActivity : AppCompatActivity(), MainInterface.View, NavigationView.OnN
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun getCentrosCulturaisSuccess(result: QuerySnapshot) {
+    override fun getCentrosCulturaisSuccess(result: ArrayList<CultureCenter>) {
         initRecycleView(result)
     }
 
-    private fun initRecycleView(result: QuerySnapshot){
+    private fun initRecycleView(result: ArrayList<CultureCenter>){
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = MainAdapter(this, result)
     }

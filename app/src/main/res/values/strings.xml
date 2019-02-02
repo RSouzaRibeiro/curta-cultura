@@ -1,7 +1,4 @@
 <resources>
-
-    <string name="API_KEY_PLACE">AIzaSyAUv2EfcjBQBGB0FZmVTQ5LjXECKAiVxcU</string>
-    <string name="TOKEN_CLIMA">26541611b0ed37585afb4439ed466cd4</string>
     <string name="app_name">Curta Cultura</string>
     <string name="title_activity_main">MainActivity</string>
 
@@ -43,4 +40,9 @@
     <string name="mensagem_confirme_senha">Confirme senha</string>
     <string name="mensagem_campo_senha_diferente">Os campos de senhas devem ser iguais.</string>
     <string name="mensagem_envio_email">Enviamos um email para resetar a senha</string>
+
+    <string name="admob_id">ca-app-pub-9790161319952745~4357086172</string>
+    <string name="admob_idteste">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="banner_id">ca-app-pub-9790161319952745/2463412390</string>
+    <string name="intercitial_id">ca-app-pub-9790161319952745/7663768180</string>
 </resources>

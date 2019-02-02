@@ -9,30 +9,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import br.com.curtacultura.curtacultura.R
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.item_centros.view.*
 import android.support.v4.content.ContextCompat.startActivity
-
+import br.com.curtacultura.curtacultura.model.CultureCenter
 
 
 class MainAdapter(val context: Context,
-                        val centros: QuerySnapshot): RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+                        val centros: ArrayList<CultureCenter>): RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_centros, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return centros.size()
+        return centros.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       val centro = centros.documents[position]
+       val centro = centros[position]
 
-        holder.itemView.nomeTXT.text = centro.get("nome").toString()
-        holder.itemView.emailTXT.text = centro.get("email").toString()
+        holder.itemView.nomeTXT.text = centro.name
+        holder.itemView.emailTXT.text = centro.description
 
-        holder.itemView.chamadaIMG.setOnClickListener{
+        /*holder.itemView.chamadaIMG.setOnClickListener{
             try {
                 val intent = Intent(Intent.ACTION_DIAL)
                 intent.data = Uri.parse("tel:" + centro.get("telefone").toString())
@@ -40,9 +39,9 @@ class MainAdapter(val context: Context,
             } catch (e: Exception) {
                 Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
-        holder.itemView.localIMG.setOnClickListener{
+        /*holder.itemView.localIMG.setOnClickListener{
             try {
                 val url = Uri.parse("geo:"+centro.get("latitude").toString()+","+centro.get("longitude").toString())
                 val mapIntent = Intent(Intent.ACTION_VIEW, url)
@@ -53,7 +52,7 @@ class MainAdapter(val context: Context,
             }catch (e: Exception) {
                 Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
 
 
